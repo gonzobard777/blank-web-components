@@ -1,0 +1,27 @@
+{
+  "name": "blank-web-components",
+  "version": "0.0.1",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack --mode production",
+    "dev": "webpack --mode development",
+    "start": "webpack-dev-server --mode development --port 4277 --open"
+  },
+  "keywords": [],
+  "author": "Do-While-For-Each",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "x",
+    "css-loader": "x",
+    "file-loader": "x",
+    "html-webpack-plugin": "x",
+    "less": "x",
+    "less-loader": "x",
+    "ts-loader": "x",
+    "typescript": "x",
+    "webpack": "x",
+    "webpack-cli": "x",
+    "webpack-dev-server": "x",
+    "url-loader": "x"
+  }
+}

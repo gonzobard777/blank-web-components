@@ -1,0 +1,50 @@
+
+z-input {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.z-input__label {
+  display: block;
+  margin-bottom: 7px;
+
+  font-size: 17px;
+  line-height: 15px;
+  font-weight: bold;
+  color: gray;
+}
+
+.z-input__input {
+  display: block;
+  width: 100%;
+  height: 22px;
+  padding: 0 0 1px;
+  margin: 0;
+
+  background-color: transparent;
+  border-radius: 0;
+  border: 0;
+  border-bottom: 1px solid darkblue;
+
+  font-size: 17px;
+  color: darkblue;
+
+  outline: 0;
+  appearance: none;
+}
+
+.z-input__input,
+.z-input__input:focus {
+  border-color: darkblue;
+}
+
+.z-input__label--error,
+.z-input__input--error {
+  color: red;
+}
+
+.z-input__input--error,
+.z-input__input--error:focus {
+  border-color: red;
+}
