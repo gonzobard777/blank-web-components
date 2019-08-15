@@ -11,7 +11,7 @@
   "author": "Do-While-For-Each",
   "license": "MIT",
   "devDependencies": {
-    "@types/node": "x",
+    "@types/node": "^12.7.2",
     "css-loader": "x",
     "file-loader": "x",
     "html-webpack-plugin": "x",
@@ -19,9 +19,9 @@
     "less-loader": "x",
     "ts-loader": "x",
     "typescript": "x",
+    "url-loader": "x",
     "webpack": "x",
     "webpack-cli": "x",
-    "webpack-dev-server": "x",
-    "url-loader": "x"
+    "webpack-dev-server": "x"
   }
 }

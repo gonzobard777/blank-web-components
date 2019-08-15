@@ -57,48 +57,48 @@ export class ZLoginForm extends HTMLFormElement implements ICustomElement {
     const isError = !!this.errorMessage;
 
     this.templateNode.innerHTML = `
-            <z-input class="z-form__input  ${this.usernameElemClassName}"
-                      type="text"
-                      label="Username"
-                      ${username == undefined ? '' : `value="${username.value}"`} 
-                      ${isError ? `isError="true"` : ''}
-                      ${username === undefined ? '' : (username.isFocused ? `isFocused="true"` : '')}
-                      ${username === undefined ? '' : `caretPosition="${username.caretPosition}"`}
-                      dispatchEventPrefix="${ZLoginForm.TAG_NAME}" 
-                      minlength="3"
-                      maxlength="100"
-                      required="true"
-            ></z-input>
-            
-            <z-input class="z-form__input  ${this.passwordElemClassName}"
-                      type="password" 
-                      label="Password"
-                      ${password == undefined ? '' : `value="${password.value}"`} 
-                      ${isError ? `isError="true"` : ''}
-                      ${password === undefined ? '' : (password.isFocused ? `isFocused="true"` : '')}
-                      ${password === undefined ? '' : `caretPosition="${password.caretPosition}"`}
-                      dispatchEventPrefix="${ZLoginForm.TAG_NAME}" 
-                      autocomplete="current-password"
-                      required="true"
-            ></z-input>
-            
-            <div class="z-form__submit-container  z-login-form__submit-container">
-                <z-button
-                    type="submit"
-                    label="Войти"
-                    showOverlay="${this.showOverlay}"
-                ></z-button>
-                <div class="z-form__error-text-wrap">
-                    <span class="z-form__error-text">${this.errorMessage}</span>
-                </div>
-            </div>
-            
-            <div class="z-login-form__restore-req">
-                <p class="z-root__help">
-                    <a href="${getLocationBase() + '/' + AppRoutes.restoreReq}">Восстановить пароль</a>
-                </p>
-            </div>
-        `;
+      <z-input class="z-form__input  ${this.usernameElemClassName}"
+                type="text"
+                label="Username"
+                ${username == undefined ? '' : `value="${username.value}"`} 
+                ${isError ? `isError="true"` : ''}
+                ${username === undefined ? '' : (username.isFocused ? `isFocused="true"` : '')}
+                ${username === undefined ? '' : `caretPosition="${username.caretPosition}"`}
+                dispatchEventPrefix="${ZLoginForm.TAG_NAME}" 
+                minlength="3"
+                maxlength="100"
+                required="true"
+      ></z-input>
+      
+      <z-input class="z-form__input  ${this.passwordElemClassName}"
+                type="password" 
+                label="Password"
+                ${password == undefined ? '' : `value="${password.value}"`} 
+                ${isError ? `isError="true"` : ''}
+                ${password === undefined ? '' : (password.isFocused ? `isFocused="true"` : '')}
+                ${password === undefined ? '' : `caretPosition="${password.caretPosition}"`}
+                dispatchEventPrefix="${ZLoginForm.TAG_NAME}" 
+                autocomplete="current-password"
+                required="true"
+      ></z-input>
+      
+      <div class="z-form__submit-container  z-login-form__submit-container">
+          <z-button
+              type="submit"
+              label="Login"
+              showOverlay="${this.showOverlay}"
+          ></z-button>
+          <div class="z-form__error-text-wrap">
+              <span class="z-form__error-text">${this.errorMessage}</span>
+          </div>
+      </div>
+      
+      <div class="z-login-form__restore-req">
+          <p class="z-root__help">
+              <a href="${getLocationBase() + '/' + AppRoutes.restoreReq}">Restore password</a>
+          </p>
+      </div>
+    `;
     this.innerHTML = '';
     this.appendChild(this.templateNode.content.cloneNode(true));
 

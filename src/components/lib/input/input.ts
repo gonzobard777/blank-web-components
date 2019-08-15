@@ -81,23 +81,23 @@ export class ZInput extends HTMLElement implements ICustomElement {
     const required = this.getAttribute(Attributes.required);
 
     this.templateNode.innerHTML = `
-            <label 
-                class="z-input__label  ${isError ? 'z-input__label--error' : ''}"
-                for="${this.inputId}"
-            >${label ? label : ''}</label>
-            <input
-                class="z-input__input  ${isError ? 'z-input__input--error' : ''}"
-                ${value === null ? '' : `value="${value}"`}
-                type="${type ? type : 'text'}"
-                ${minlength === null ? '' : `minlength=${minlength}`}
-                ${maxlength === null ? '' : `maxlength=${maxlength}`}
-                placeholder="${placeholder ? placeholder : ''}"
-                autocomplete="${autocomplete ? 'on' : 'off'}"
-                spellcheck="${spellcheck ? 'true' : 'false'}"
-                ${required ? 'required' : ''}
-                id="${this.inputId}"
-            />
-        `;
+      <label 
+          class="z-input__label  ${isError ? 'z-input__label--error' : ''}"
+          for="${this.inputId}"
+      >${label ? label : ''}</label>
+      <input
+          class="z-input__input  ${isError ? 'z-input__input--error' : ''}"
+          ${value === null ? '' : `value="${value}"`}
+          type="${type ? type : 'text'}"
+          ${minlength === null ? '' : `minlength=${minlength}`}
+          ${maxlength === null ? '' : `maxlength=${maxlength}`}
+          placeholder="${placeholder ? placeholder : ''}"
+          autocomplete="${autocomplete ? 'on' : 'off'}"
+          spellcheck="${spellcheck ? 'true' : 'false'}"
+          ${required ? 'required' : ''}
+          id="${this.inputId}"
+      />
+    `;
     this.innerHTML = '';
     this.appendChild(this.templateNode.content.cloneNode(true));
 

@@ -29,21 +29,21 @@ export class ZButton extends HTMLElement implements ICustomElement {
     let isDisabled = this.getAttribute(Attributes.isDisabled) === 'true';
     const showOverlay = this.getAttribute(Attributes.showOverlay) === 'true';
 
-    if (showOverlay){
+    if (showOverlay) {
       isDisabled = true;
     }
 
     this.templateNode.innerHTML = `
-            <button
-                class="z-button__button"
-                type="${type ? type : 'button'}"
-                ${isDisabled ? 'disabled' : ''}
-            >${label ? label : 'Ok'}</button>
-            
-            ${showOverlay ? `
-            <div class="z-button-overlay"></div>
-            ` : ''}
-        `;
+      <button
+          class="z-button__button"
+          type="${type ? type : 'button'}"
+          ${isDisabled ? 'disabled' : ''}
+      >${label ? label : 'Ok'}</button>
+      
+      ${showOverlay ? `
+      <div class="z-button-overlay"></div>
+      ` : ''}
+    `;
     this.innerHTML = '';
     this.appendChild(this.templateNode.content.cloneNode(true));
   }

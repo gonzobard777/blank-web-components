@@ -30,9 +30,11 @@ export class ZRoot extends HTMLElement implements ICustomElement {
     switch (location.pathname.split('/').pop()) {
       case AppRoutes.index: {
         const elem = document.createElement('div');
-        elem.innerHTML = `<p class="z-form__error-info">
-                              Index page. You can go to <a href="${getLocationBase() + '/' + AppRoutes.login}">Login</a> page
-                          </p>`;
+        elem.innerHTML = `
+          <p class="z-form__error-info">
+              Index page. You can go to <a href="${getLocationBase() + '/' + AppRoutes.login}">Login</a> page
+          </p>
+        `;
         return elem;
       }
       case AppRoutes.login: {
@@ -43,9 +45,11 @@ export class ZRoot extends HTMLElement implements ICustomElement {
       }
       default: {
         const elem = document.createElement('div');
-        elem.innerHTML = `<p class="z-form__error-info">
-                              Неизвестный URL. <a href="${getLocationBase() + '/' + AppRoutes.index}">Index</a> page
-                          </p>`;
+        elem.innerHTML = `
+          <p class="z-form__error-info">
+              Неизвестный URL. <a href="${getLocationBase() + '/' + AppRoutes.index}">Index</a> page
+          </p>
+        `;
         return elem;
       }
     }
@@ -59,15 +63,15 @@ export class ZRoot extends HTMLElement implements ICustomElement {
 
   render() {
     this.templateNode.innerHTML = `
-        <div class="z-root__header">
-         Header
+      <div class="z-root__header">
+       Header
+      </div>
+      <div class="${this.routerOutletElemClassName}">
+        <div>
+          <p class="z-root__help">Additional text</p>
         </div>
-        <div class="${this.routerOutletElemClassName}">
-          <div class="${this.routerOutletElemClassName}">
-            <p class="z-root__help">Additional text</p>
-          </div>
-        </div>
-        `;
+      </div>
+    `;
     this.innerHTML = '';
     this.appendChild(this.templateNode.content.cloneNode(true)); // root элемент добавлен в DOM
 

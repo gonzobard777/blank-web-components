@@ -3,14 +3,38 @@
 <head>
   <meta charset="UTF-8">
   <title>Title</title>
-
-  <!-- custom elements polifill for Safari -->
-  <script src="//unpkg.com/@ungap/custom-elements-builtin"></script>
-
 </head>
 <body>
 
+
 <z-root></z-root>
+
+
+<script>
+  //
+  // For fucking Safari of Mac OS & some old shit.
+  // https://github.com/ungap/custom-elements-builtin#all-possible-features-detections
+  //
+  if (this.customElements) {
+    try {
+      // feature detect browsers that "forgot" 🙄 to implement built-in extends
+      customElements.define('built-in', document.createElement('p').constructor, {'extends': 'p'});
+    } catch (_) {
+      // only WebKit or Safari
+      document.write('<script src="//unpkg.com/@ungap/custom-elements-builtin"><\x2fscript>');
+      console.log('Fucking Safari of Mac OS',);
+    }
+  } else {
+    // only legacy browsers
+    document.write('<script src="//unpkg.com/document-register-element"><\x2fscript>');
+    console.log('legacy browsers',);
+  }
+</script>
+<script>
+  // everything else that needs a reliable customElements global
+  // with built-in extends capabilities
+  // Note: it's important it's one <script> tag after the previous one!
+</script>
 
 </body>
 </html>
