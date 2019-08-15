@@ -1,23 +1,23 @@
 import {isEqualsSimple} from "./globals";
 
 export function initDocumentHeadStyleNode(styleFileContent: any[], tagName: string): HTMLStyleElement {
-    const styleText = 'style';
-    const id = `${styleText}__${tagName}`;
-    let styleNode = document.getElementById(id) as HTMLStyleElement;
+  const styleText = 'style';
+  const id = `${styleText}__${tagName}`;
+  let styleNode = document.getElementById(id) as HTMLStyleElement;
 
-    if (!styleNode) { // стили компонента добавляется 1 раз
-        styleNode = document.createElement(styleText) as HTMLStyleElement;
-        styleNode.setAttribute('id', id);
-        styleNode.innerText = styleFileContent.toString();
-        document.head.appendChild(styleNode);
-    }
-    return styleNode;
+  if (!styleNode) { // стили компонента добавляется 1 раз
+    styleNode = document.createElement(styleText) as HTMLStyleElement;
+    styleNode.setAttribute('id', id);
+    styleNode.innerText = styleFileContent.toString();
+    document.head.appendChild(styleNode);
+  }
+  return styleNode;
 }
 
 interface ICustomElementClassDecoratorData {
-    selector: string;
-    styleRequire?: any[];
-    extends?: string;
+  selector: string;
+  styleRequire?: any[];
+  extends?: string;
 }
 
 //
@@ -58,41 +58,48 @@ interface ICustomElementClassDecoratorData {
 // вынуждает делать декоратор(здесь это похоже на множественное наследование), чтобы хоть как-то повторно использовать код
 //
 export const CustomElementClassDecorator = (decoratorData: ICustomElementClassDecoratorData) =>
-    (classConstructor: any) => {
-        const prototype = classConstructor.prototype;
+  (classConstructor: any) => {
+    const prototype = classConstructor.prototype;
+    const connectedCallback = prototype.connectedCallback;
 
-        prototype.connectedCallback = function () {
-            this.templateNode = document.createElement('template') as HTMLTemplateElement;
-            if (decoratorData.styleRequire) {
-                this.styleNode = initDocumentHeadStyleNode(decoratorData.styleRequire, classConstructor.TAG_NAME);
-            }
-            this.render();
-        };
+    prototype.connectedCallback = function () {
+      if (connectedCallback) {
+        connectedCallback.call(this);
+      }
 
-        prototype.disconnectedCallback = function () {
-            if (this.removeEventListeners) {
-                this.removeEventListeners();
-            }
-        };
-
-        prototype.attributeChangedCallback = function (name, oldValue, newValue) {
-            if (isEqualsSimple(oldValue, newValue)) { // перерендер только, если входящие данные изменились
-                this.render();
-            }
-        };
-
-        window.customElements.define( // добавить новый пользовательский элемент в CustomElementRegistry браузера
-            decoratorData.selector,
-            classConstructor,
-            decoratorData.extends ? {extends: decoratorData.extends} : {}
-        );
+      this.templateNode = document.createElement('template') as HTMLTemplateElement;
+      if (decoratorData.styleRequire) {
+        this.styleNode = initDocumentHeadStyleNode(decoratorData.styleRequire, classConstructor.TAG_NAME);
+      }
+      this.render();
     };
 
+    prototype.disconnectedCallback = function () {
+      if (this.removeEventListeners) {
+        this.removeEventListeners();
+      }
+    };
+
+    prototype.attributeChangedCallback = function (name, oldValue, newValue) {
+      if (isEqualsSimple(oldValue, newValue)) { // перерендер только, если входящие данные изменились
+        this.render();
+      }
+    };
+
+    window.customElements.define( // добавить новый пользовательский элемент в CustomElementRegistry браузера
+      decoratorData.selector,
+      classConstructor,
+      decoratorData.extends ? {extends: decoratorData.extends} : {}
+    );
+  };
+
 export interface ICustomElement {
-    templateNode: HTMLTemplateElement;
+  templateNode: HTMLTemplateElement;
 
-    render(): void;
+  connectedCallback?: () => void;
 
-    addEventListeners?: () => void;
-    removeEventListeners?: () => void;
+  render(): void;
+
+  addEventListeners?: () => void;
+  removeEventListeners?: () => void;
 }

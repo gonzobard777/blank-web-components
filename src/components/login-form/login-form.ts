@@ -15,14 +15,24 @@ export class ZLoginForm extends HTMLFormElement implements ICustomElement {
   private username: ZInput;
   private password: ZInput;
 
-  private usernameElemClassName = `${ZLoginForm.TAG_NAME}__username`; // z-login-form__username
-  private passwordElemClassName = `${ZLoginForm.TAG_NAME}__password`; // z-login-form__password
+  private usernameElemClassName;
+  private passwordElemClassName;
 
-  private errorMessage = '';
-  private showOverlay = false;
+  private errorMessage;
+  private showOverlay;
 
   constructor() {
     super();
+    // You cannot use the constructor in any meaningful way if you want to ensure API consistency.
+    // If you need a reliable entry point to setup your custom builtins use the connectedCallback method instead of the constructor.
+  }
+
+  connectedCallback() {
+    this.usernameElemClassName = `${ZLoginForm.TAG_NAME}__username`; // z-login-form__username
+    this.passwordElemClassName = `${ZLoginForm.TAG_NAME}__password`; // z-login-form__password
+
+    this.errorMessage = '';
+    this.showOverlay = false;
   }
 
   addEventListeners() {
